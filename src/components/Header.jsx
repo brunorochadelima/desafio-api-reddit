@@ -16,7 +16,7 @@ export default function Header() {
   //   })
   // }
 
-  const [hot, setHot] = React.useState([]);
+  const [post, setPost] = React.useState([]);
 
   function handlePesquisa(event) {
     const url = `https://www.reddit.com/r/reactjs/${event.target.innerText.toLowerCase()}.json`;
@@ -27,15 +27,12 @@ export default function Header() {
         const data = response.data.data.children;
 
         const posts = [];
-        setHot(posts)
 
         data.map((autor) => {
           posts.push(autor.data);
         });
 
-        setHot(posts);
-
-        console.log(hot);
+        setPost(posts);
       })
 
       .catch((error) => console.log(error));
@@ -58,15 +55,21 @@ export default function Header() {
           >
             Hot
           </button>
-          <button onClick={handlePesquisa} className="bg-slate-400 py-3 px-20 rounded-lg text-white">
+          <button
+            onClick={handlePesquisa}
+            className="bg-slate-400 py-3 px-20 rounded-lg text-white"
+          >
             New
           </button>
-          <button onClick={handlePesquisa} className="bg-slate-400 py-3 px-20 rounded-lg text-white">
+          <button
+            onClick={handlePesquisa}
+            className="bg-slate-400 py-3 px-20 rounded-lg text-white"
+          >
             Rising
           </button>
         </div>
       </nav>
-      {hot.map((post) => (
+      {post.map((post) => (
         <p key={post.id}>{post.author}</p>
       ))}
     </header>
