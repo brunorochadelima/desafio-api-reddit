@@ -18,8 +18,8 @@ export default function Header() {
 
   const [hot, setHot] = React.useState([]);
 
-  function handlePesquisa() {
-    const url = "https://www.reddit.com/r/reactjs/hot.json";
+  function handlePesquisa(event) {
+    const url = `https://www.reddit.com/r/reactjs/${event.target.innerText.toLowerCase()}.json`;
     //const posts = [];
     axios
       .get(url)
@@ -58,16 +58,16 @@ export default function Header() {
           >
             Hot
           </button>
-          <button className="bg-slate-400 py-3 px-20 rounded-lg text-white">
-            News
+          <button onClick={handlePesquisa} className="bg-slate-400 py-3 px-20 rounded-lg text-white">
+            New
           </button>
-          <button className="bg-slate-400 py-3 px-20 rounded-lg text-white">
+          <button onClick={handlePesquisa} className="bg-slate-400 py-3 px-20 rounded-lg text-white">
             Rising
           </button>
         </div>
       </nav>
       {hot.map((post) => (
-        <p>{post.author}</p>
+        <p key={post.id}>{post.author}</p>
       ))}
     </header>
   );
