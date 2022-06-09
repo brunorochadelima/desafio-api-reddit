@@ -59,17 +59,34 @@ export default function Home() {
             Rising
           </button>
         </div>
-      </div>
 
-      {post.map((post) => (
-        <div key={post.id}>
-          <h4>{post.title}</h4>
-          <p>
-            Enviado {converterData(post.created)} por {post.author}
-          </p>
-          <a href={`https://www.reddit.com${post.permalink}`}>Acesse o post</a>
+        <div>
+          {post.map((post) => (
+            <div key={post.id} className="flex gap-4 py-3 border-t-2">
+              <div>
+                <img
+                  src="http://placeimg.com/77/77/tech"
+                  className="rounded-lg"
+                />
+              </div>
+
+              <div >
+                <h4 className="text-lg font-semibold">{post.title}</h4>
+                <p className="text-slate-500">
+                  enviado {converterData(post.created)} por{" "}
+                  <span className="text-primary">{post.author}</span>
+                </p>
+                <a
+                  className="font-semibold"
+                  href={`https://www.reddit.com${post.permalink}`}
+                >
+                  Acesse o post
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
