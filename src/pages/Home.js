@@ -42,19 +42,19 @@ export default function Home() {
         <div className="flex justify-center my-4 gap-5">
           <button
             onClick={handlePesquisa}
-            className="bg-slate-400 py-3 px-20 rounded-lg text-white"
+            className="bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary"
           >
             Hot
           </button>
           <button
             onClick={handlePesquisa}
-            className="bg-slate-400 py-3 px-20 rounded-lg text-white"
+            className="bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary"
           >
             New
           </button>
           <button
             onClick={handlePesquisa}
-            className="bg-slate-400 py-3 px-20 rounded-lg text-white"
+            className="bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary"
           >
             Rising
           </button>
@@ -70,7 +70,7 @@ export default function Home() {
                 />
               </div>
 
-              <div >
+              <div>
                 <h4 className="text-lg font-semibold">{post.title}</h4>
                 <p className="text-slate-500">
                   enviado {converterData(post.created)} por{" "}
