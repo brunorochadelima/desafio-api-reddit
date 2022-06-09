@@ -73,8 +73,7 @@ export default function Home() {
               <div>
                 <h4 className="text-lg font-semibold">{post.title}</h4>
                 <p className="text-slate-500">
-                  enviado {converterData(post.created)} por
-                  <span className="text-primary">{post.author}</span>
+                  enviado {converterData(post.created)} por <span className="text-primary"> {post.author}</span>
                 </p>
                 <a
                   className="font-semibold"
