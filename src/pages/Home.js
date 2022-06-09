@@ -63,7 +63,7 @@ export default function Home() {
 
         <div>
           {post.map((post) => (
-            <div key={post.id} className="flex gap-4 py-3 border-t-2">
+            <div key={post.id} className="flex flex-wrap gap-4 py-3 border-t-2">
               <div>
                 <img
                   src="http://placeimg.com/77/77/tech"
