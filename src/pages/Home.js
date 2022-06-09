@@ -38,23 +38,23 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className="container mx-auto">
-        <div className="flex justify-center my-4 gap-5">
+      <section className="container mx-auto px-4">
+        <div className="flex flex-wrap justify-center my-4 gap-5">
           <button
             onClick={handlePesquisa}
-            className="bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary"
+            className="w-full bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit"
           >
             Hot
           </button>
           <button
             onClick={handlePesquisa}
-            className="bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary"
+            className="w-full bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit"
           >
             New
           </button>
           <button
             onClick={handlePesquisa}
-            className="bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary"
+            className="w-full bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit"
           >
             Rising
           </button>
@@ -73,20 +73,25 @@ export default function Home() {
               <div>
                 <h4 className="text-lg font-semibold">{post.title}</h4>
                 <p className="text-slate-500">
-                  enviado {converterData(post.created)} por{" "}
+                  enviado {converterData(post.created)} por
                   <span className="text-primary">{post.author}</span>
                 </p>
                 <a
                   className="font-semibold"
                   href={`https://www.reddit.com${post.permalink}`}
                 >
-                  Acesse o post
+                  Link do post
                 </a>
               </div>
             </div>
           ))}
         </div>
-      </div>
+        {post.length > 0 && (
+          <button className="bg-primary text-white w-full rounded-md py-2 mb-5">
+            ✛ Ver mais
+          </button>
+        )}
+      </section>
     </div>
   );
 }
