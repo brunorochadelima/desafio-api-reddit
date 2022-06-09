@@ -66,7 +66,7 @@ export default function Home() {
               <div>
                 <img
                   src="http://placeimg.com/77/77/tech"
-                  className="rounded-lg"
+                  className="rounded-lg" alt={post.title}
                 />
               </div>
 
