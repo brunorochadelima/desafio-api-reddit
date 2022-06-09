@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import moment from "moment";
+import "moment/locale/pt";
 
 export default function Home() {
   const [post, setPost] = React.useState([]);
@@ -27,18 +28,12 @@ export default function Home() {
     console.log(post);
   }
 
-  function converterData() {
-    const unixTime = 1654050387 * 1000;
-
-    // const dateVal = new Date(unixTime).toLocaleDateString("pt-BR");
-    // console.log(dateVal);
-
+  function converterData(unixDate) {
+    moment.locale("pt");
+    const unixTime = unixDate * 1000;
     const tempo = moment(unixTime).startOf("hour").fromNow();
-
-    console.log(tempo);
+    return tempo;
   }
-
-  converterData();
 
   return (
     <div>
@@ -70,9 +65,9 @@ export default function Home() {
         <div key={post.id}>
           <h4>{post.title}</h4>
           <p>
-            Enviado há {post.created} por {post.author}
+            Enviado {converterData(post.created)} por {post.author}
           </p>
-          <p>{post.permalink}</p>
+          <a href={`https://www.reddit.com${post.permalink}`}>Acesse o post</a>
         </div>
       ))}
     </div>
