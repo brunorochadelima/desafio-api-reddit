@@ -16,6 +16,7 @@ export default function Home() {
 
         const posts = [];
 
+        // eslint-disable-next-line array-callback-return
         data.map((autor) => {
           posts.push(autor.data);
         });
