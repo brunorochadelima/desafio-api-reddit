@@ -33,6 +33,7 @@ export default function Home() {
       .catch((error) => console.log(error));
 
     console.log(post);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, loadPosts]);
 
   React.useEffect(() => {
@@ -53,19 +54,25 @@ export default function Home() {
         <div className="flex flex-wrap justify-center my-4 gap-5">
           <button
             onClick={() => setPage("hot")}
-            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${page === "hot" ? "bg-primary" : "bg-slate-400"}`}
+            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${
+              page === "hot" ? "bg-primary" : "bg-slate-400"
+            }`}
           >
             Hot
           </button>
           <button
             onClick={() => setPage("new")}
-            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${page === "new" ? "bg-primary" : "bg-slate-400"}`}
+            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${
+              page === "new" ? "bg-primary" : "bg-slate-400"
+            }`}
           >
             New
           </button>
           <button
             onClick={() => setPage("rising")}
-            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${page === "rising" ? "bg-primary" : "bg-slate-400"}`}
+            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${
+              page === "rising" ? "bg-primary" : "bg-slate-400"
+            }`}
           >
             Rising
           </button>
