@@ -6,9 +6,15 @@ import "moment/locale/pt";
 
 export default function Home() {
   const [post, setPost] = React.useState([]);
+  const [page, setPage] = React.useState("");
+  const [loadPosts, setloadPosts] = React.useState(5);
 
-  function handlePesquisa(event) {
-    const url = `https://www.reddit.com/r/reactjs/${event.target.innerText.toLowerCase()}.json`;
+  function carregarPosts() {
+    setloadPosts(loadPosts + 5);
+  }
+
+  const searchApi = React.useCallback(async () => {
+    const url = `https://www.reddit.com/r/reactjs/${page}.json?limit=${loadPosts}`;
     axios
       .get(url)
       .then((response) => {
@@ -27,7 +33,11 @@ export default function Home() {
       .catch((error) => console.log(error));
 
     console.log(post);
-  }
+  }, [page, loadPosts]);
+
+  React.useEffect(() => {
+    searchApi();
+  }, [searchApi]);
 
   function converterData(unixDate) {
     moment.locale("pt");
@@ -42,20 +52,20 @@ export default function Home() {
       <section className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center my-4 gap-5">
           <button
-            onClick={handlePesquisa}
-            className="w-full bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit"
+            onClick={() => setPage("hot")}
+            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${page === "hot" ? "bg-primary" : "bg-slate-400"}`}
           >
             Hot
           </button>
           <button
-            onClick={handlePesquisa}
-            className="w-full bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit"
+            onClick={() => setPage("new")}
+            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${page === "new" ? "bg-primary" : "bg-slate-400"}`}
           >
             New
           </button>
           <button
-            onClick={handlePesquisa}
-            className="w-full bg-slate-400 py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit"
+            onClick={() => setPage("rising")}
+            className={`w-full  py-3 px-20 rounded-lg text-white hover:bg-primary md:w-fit ${page === "rising" ? "bg-primary" : "bg-slate-400"}`}
           >
             Rising
           </button>
@@ -67,14 +77,16 @@ export default function Home() {
               <div>
                 <img
                   src="http://placeimg.com/77/77/tech"
-                  className="rounded-lg" alt={post.title}
+                  className="rounded-lg"
+                  alt={post.title}
                 />
               </div>
 
               <div>
                 <h4 className="text-lg font-semibold">{post.title}</h4>
                 <p className="text-slate-500">
-                  enviado {converterData(post.created)} por <span className="text-primary"> {post.author}</span>
+                  enviado {converterData(post.created)} por{" "}
+                  <span className="text-primary"> {post.author}</span>
                 </p>
                 <a
                   className="font-semibold"
@@ -87,7 +99,10 @@ export default function Home() {
           ))}
         </div>
         {post.length > 0 && (
-          <button className="bg-primary text-white w-full rounded-md py-2 mb-5">
+          <button
+            onClick={carregarPosts}
+            className="bg-primary text-white w-full rounded-md py-2 mb-5"
+          >
             ✛ Ver mais
           </button>
         )}
