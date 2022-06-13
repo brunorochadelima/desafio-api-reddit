@@ -3,23 +3,27 @@ import axios from "axios";
 import Header from "../components/Header";
 import moment from "moment";
 import "moment/locale/pt";
+import iconLoading from "../img/dual-ring.gif";
 
 export default function Home() {
   const [post, setPost] = React.useState([]);
   const [page, setPage] = React.useState("");
   const [loadPosts, setloadPosts] = React.useState(5);
+  const [loading, setLoading] = React.useState(false);
 
   function carregarPosts() {
     setloadPosts(loadPosts + 5);
   }
 
   const searchApi = React.useCallback(async () => {
+    setLoading(true);
     const url = `https://www.reddit.com/r/reactjs/${page}.json?limit=${loadPosts}`;
     axios
       .get(url)
       .then((response) => {
         const data = response.data.data.children;
 
+        setLoading(false);
         const posts = [];
 
         // eslint-disable-next-line array-callback-return
@@ -104,6 +108,9 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="grid place-items-center">
+          {loading && <img src={iconLoading} alt="ícone loading" />}
         </div>
         {post.length > 0 && (
           <button
